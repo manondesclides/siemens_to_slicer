@@ -1,0 +1,16 @@
+#!/bin/bash
+FOLDER=${1?Error: no name given}
+
+
+for f in $FOLDER/*.dat
+do
+	echo "Processing $f"
+	siemens_to_ismrmrd -f $f \
+		   -z 2 \
+		   -m IsmrmrdParameterMap_Siemens.xml \
+		   -x IsmrmrdParameterMap_Siemens_EPI_PF_PreZeros.xsl \
+                   -o ${f%%.*}.h5 
+	
+done
+
+
